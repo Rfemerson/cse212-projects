@@ -13,17 +13,20 @@ public static class Arrays
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
 
-        // Create a list of doubles to hold the results
+        // PLAN:
+        // 1.Create a list to store the results.
+        // 2.Use a for loop to iterate through all possibilities for the length, 
+        // starting at one and continuing until the index is less than or equal to the length.
+        // 3.Add the result of `number * index` to the list.
+        // 4.Return the list converted to an array as the result.
+
         List<double> results = new();
-        // Loop from 1 to length
         for (double i = 1; i <= length; i++)
         {
-            // Multiply the number by the loop index and add it to the results list
             results.Add(number * i);
         }
 
-        // Convert the list to an array and return it
-        return results.ToArray(); // replace this return statement with your own
+        return results.ToArray(); 
     }
 
     /// <summary>
@@ -40,21 +43,24 @@ public static class Arrays
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
 
-        // Calculate the index where the split will occur
+        // PLAN:
+        // 1.Calculate the point where the original list will be "split." From this index onwards, the elements will occupy the beginning of the new list.
+        // 2.Create a temporary list to store the elements in the new order.
+        // 3.Iterate through each position of the result list. Calculate the corresponding index in the original list. 
+        // When the index goes beyond the last element, it automatically wraps back to index 0.
+        // 4.Add the element located at the calculated index of the original list to the `result` list.
+        // 5.Replace the contents of the list received as a parameter:clear the original list and copy all elements from `result` to `data`.
+
         int splitIndex = data.Count - amount;
 
-        // Create a new list to hold the rotated data
         List<int> result = new();
 
-        // Loop through the original data and add elements to the result list in the new order
         for (int i = 0; i < data.Count; i++)
         {
-            // Calculate the original index in the original data
             int originalIndex = (i + splitIndex) % data.Count;
             result.Add(data[originalIndex]);
         }
 
-        // Clear the original data list and add the rotated elements back into it
         data.Clear();
         data.AddRange(result);
 
