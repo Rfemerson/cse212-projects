@@ -13,7 +13,17 @@ public static class Arrays
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
 
-        return []; // replace this return statement with your own
+        // Create a list of doubles to hold the results
+        List<double> results = new();
+        // Loop from 1 to length
+        for (double i = 1; i <= length; i++)
+        {
+            // Multiply the number by the loop index and add it to the results list
+            results.Add(number * i);
+        }
+
+        // Convert the list to an array and return it
+        return results.ToArray(); // replace this return statement with your own
     }
 
     /// <summary>
@@ -29,5 +39,24 @@ public static class Arrays
         // Remember: Using comments in your program, write down your process for solving this problem
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
+
+        // Calculate the index where the split will occur
+        int splitIndex = data.Count - amount;
+
+        // Create a new list to hold the rotated data
+        List<int> result = new();
+
+        // Loop through the original data and add elements to the result list in the new order
+        for (int i = 0; i < data.Count; i++)
+        {
+            // Calculate the original index in the original data
+            int originalIndex = (i + splitIndex) % data.Count;
+            result.Add(data[originalIndex]);
+        }
+
+        // Clear the original data list and add the rotated elements back into it
+        data.Clear();
+        data.AddRange(result);
+
     }
 }
