@@ -29,5 +29,18 @@
     /// <param name="numbers">array of integers</param>
     private static void DisplaySumPairs(int[] numbers) {
         // TODO Problem 2 - This should print pairs of numbers in the given array
+        var pairs = new HashSet<int>();
+
+        foreach (int number in numbers)
+        {
+            var complement = 10 - number;
+
+            if (pairs.Contains(complement))
+            {
+                Console.WriteLine($"{complement} + {number} = 10");
+            }
+
+            pairs.Add(number);
+        }
     }
 }

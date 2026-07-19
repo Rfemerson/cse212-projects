@@ -22,7 +22,22 @@ public static class SetsAndMaps
     public static string[] FindPairs(string[] words)
     {
         // TODO Problem 1 - ADD YOUR CODE HERE
-        return [];
+        var wordSet = new HashSet<string>(words);
+        var pairs = new List<string>();
+
+        foreach (var word in words)
+        {
+            if (word[0] == word[1])
+                continue;
+
+            var reverse = $"{word[1]}{word[0]}";
+
+            if (wordSet.Contains(reverse) && string.Compare(word, reverse) < 0)
+            {
+                pairs.Add($"{word} & {reverse}");
+            }
+        }
+        return pairs.ToArray();
     }
 
     /// <summary>
@@ -43,6 +58,16 @@ public static class SetsAndMaps
         {
             var fields = line.Split(",");
             // TODO Problem 2 - ADD YOUR CODE HERE
+            var degree = fields[3];
+
+            if (!degrees.ContainsKey(degree))
+            {
+                degrees[degree] = 1;
+            }
+            else
+            {
+                degrees[degree]++;
+            }
         }
 
         return degrees;
@@ -67,7 +92,41 @@ public static class SetsAndMaps
     public static bool IsAnagram(string word1, string word2)
     {
         // TODO Problem 3 - ADD YOUR CODE HERE
-        return false;
+        word1 = word1.Replace(" ", "").ToLower();
+        word2 = word2.Replace(" ", "").ToLower();
+
+        var dict1 = new Dictionary<char, int>();
+        var dict2 = new Dictionary<char, int>();
+
+        foreach (char letter in word1)
+        {
+            if (!dict1.ContainsKey(letter))
+                dict1[letter] = 1;
+            else
+                dict1[letter]++;
+        }
+
+        foreach (char letter in word2)
+        {
+            if (!dict2.ContainsKey(letter))
+                dict2[letter] = 1;
+            else
+                dict2[letter]++;
+        }
+
+        if (dict1.Count != dict2.Count)
+            return false;
+
+        foreach (var item in dict1)
+        {
+            if (!dict2.ContainsKey(item.Key))
+                return false;
+
+            if (dict2[item.Key] != item.Value)
+                return false;
+        }
+
+        return true;
     }
 
     /// <summary>
